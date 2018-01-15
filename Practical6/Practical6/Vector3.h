@@ -2,6 +2,7 @@
 
 #include <math.h>
 #include "string"
+#include <SFML/Graphics.hpp>
 
 class Vector3
 {
@@ -32,6 +33,8 @@ public:
 	Vector3 operator ^(Vector3 V1);
 	std::string Vector3::toString();
 	
+	
+
 private:
 	double x;
 	double y;

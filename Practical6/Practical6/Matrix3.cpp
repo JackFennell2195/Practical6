@@ -39,12 +39,27 @@ Matrix3::Matrix3(double _A11, double _A12, double _A13, double _A21, double _A22
 	A33 = _A33;
 }
 
+Vector3 Matrix3::operator*(Matrix3 M1)
+{
+
+}
+
+Vector3 Matrix3::operator*(Vector3 V1)
+{
+	return Vector3();
+}
+
 Matrix3 Matrix3::Transpose(Matrix3 M1)
 {
 	// a method to transpose a given matrix
 	return Matrix3(M1.A11, M1.A21, M1.A31,
 		M1.A12, M1.A22, M1.A32,
 		M1.A13, M1.A23, M1.A33);
+}
+
+Matrix3 Matrix3::operator+(Matrix3 M1)
+{
+	return Matrix3();
 }
 
 double Matrix3::Determinant(Matrix3 M1)
@@ -113,8 +128,10 @@ Matrix3 Matrix3::Inverse(Matrix3 M1)
 
 Matrix3 Matrix3::Rotation(int _angle)
 {
-	
+	return Matrix3();
 }
+
+
 
 Matrix3 Matrix3::Translate(int dx, int dy)
 {
@@ -150,25 +167,77 @@ Matrix3 Matrix3::Scale(int dx, int dy)
 
 Matrix3 Matrix3::operator-(Matrix3 M1)
 {
+	/*return -1 * M1;*/
+}
+
+Matrix3 Matrix3::operator*(double x)
+{
 	return Matrix3();
 }
 
 Matrix3 Matrix3::RotationX(int _angle)
 {
-	return Matrix3();
+	/*Double radians = PI / 180 * _angle;
+	Matrix3 answer = Matrix3();
+	answer.A11 = 1;
+	answer.A12 = 0;
+	answer.A13 = 0;
+	answer.A21 = 0;
+	answer.A22 = cos(radians);
+	answer.A23 = -sin(radians);
+	answer.A31 = 0;
+	answer.A32 = sin(radians);
+	answer.A33 = cos(radians);
+
+	return answer;*/
 }
 
 Matrix3 Matrix3::RotationY(int _angle)
 {
-	return Matrix3();
+	/*Double radians = PI / 180 * _angle;
+	Matrix3 answer = Matrix3();
+	answer.A11 = cos(radians);
+	answer.A12 = 0;
+	answer.A13 = sin(radians);
+	answer.A21 = 0;
+	answer.A22 = 1;
+	answer.A23 = 0;
+	answer.A31 = -sin(radians);
+	answer.A32 = 0;
+	answer.A33 = cos(radians);
+
+	return answer;*/
 }
 
 Matrix3 Matrix3::RotationZ(int _angle)
 {
-	return Matrix3();
+	//Double radians = PI / 180 * _angle;
+	//Matrix3 answer =  Matrix3();
+	//answer.A11 = cos(radians);
+	//answer.A12 = -sin(radians);
+	//answer.A13 = 0;
+	//answer.A21 = sin(radians);
+	//answer.A22 = cos(radians);
+	//answer.A23 = 0;
+	//answer.A31 = 0;
+	//answer.A32 = 0;
+	//answer.A33 = 1;
+
+	//return answer;
 }
 
 Matrix3 Matrix3::Scale3D(int dx)
 {
-	return Matrix3();
+	Matrix3 answer = Matrix3();
+	answer.A11 = (double)dx / 100;
+	answer.A12 = 0;
+	answer.A13 = 0;
+	answer.A21 = 0;
+	answer.A22 = (double)dx / 100;
+	answer.A23 = 0;
+	answer.A31 = 0;
+	answer.A32 = 0;
+	answer.A33 = (double)dx / 100;
+
+	return answer;
 }

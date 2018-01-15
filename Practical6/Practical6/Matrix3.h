@@ -1,5 +1,7 @@
 #pragma once
 #include  "Vector3.h"
+#include <math.h>
+
 
 class Matrix3 
 {
@@ -10,13 +12,13 @@ public:
 			double _A21, double _A22, double _A23,
 			double _A31, double _A32, double _A33);
 
-	//Vector3 operator*(Matrix3 M1, Vector3 V1);
-	//Vector3 operator *(Vector3 V1, Matrix3 M1);
+	Vector3 operator*(Matrix3 M1);
+	Vector3 operator *(Vector3 V1);
 	Matrix3 Transpose(Matrix3 M1);
-	//Matrix3 operator +(Matrix3 M1, Matrix3 M2);
-	//Matrix3 operator -(Matrix3 M1, Matrix3 M2);
-	//Matrix3 operator *(double x, Matrix3 M1);
-	//Matrix3 operator *(Matrix3 M1, Matrix3 M2);
+	Matrix3 operator +(Matrix3 M1);
+	Matrix3 operator -(Matrix3 M1);
+	Matrix3 operator *(double x);
+	//Matrix3 operator *(Matrix3 M1);
 	double Determinant(Matrix3 M1);
 	Vector3 Row(int i);
 	Vector3 Column(int i);

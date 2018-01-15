@@ -1,4 +1,5 @@
 #include "Vector3.h"
+#include <iostream>
 
 double Vector3::getX()
 {
@@ -52,12 +53,12 @@ Vector3::Vector3(Vector3 * V)
 
 }
 
-double Vector3::length()
+double Vector3::length() 
 {
 	return (double)sqrt(x * x + y * y + z * z);
 }
 
-double Vector3::lengthSquared()
+double Vector3::lengthSquared() 
 {
 	// A method to return the length squared of the vector
 	return (x * x + y * y + z * z);
@@ -78,45 +79,57 @@ void Vector3::normalise()
 
 Vector3 Vector3::operator+(Vector3 V1)
 {
-	return Vector3();
+	// An overloaded operator + to return the sum of 2 vectors
+	return Vector3(x + V1.x, y + V1.y, z + V1.z);
 }
 
-Vector3 Vector3::operator-(Vector3 V)
+Vector3 Vector3::operator-(Vector3 V1)
 {
-	return Vector3();
+	// An overloaded operator - to return the difference of 2 vectors
+	return Vector3(x - V1.x, y - V1.y, z - V1.z);
 }
 
 Vector3 Vector3::operator-()
 {
-	return Vector3();
+	// An overloaded operator - to return the negation of a single vector
+	return Vector3(x*-1, y*-1, z*-1);
 }
 
 double Vector3::operator*(Vector3 V1)
 {
-	return 0.0;
+	// An overloaded operator * to return the scalar product of 2 vectors
+	return (x * V1.x, y * V1.y, z * V1.z);
 }
 
 Vector3 Vector3::operator*(double k)
 {
-	return Vector3();
+	// An overloaded operator * to return the product of a scalar by a vector
+	return Vector3(x * (float)k, y * (float)k, z * (float)k);
 }
 
 Vector3 Vector3::operator*(float k)
 {
-	return Vector3();
+	// An overloaded operator * to return the product of a scalar by a vector
+	return Vector3(x * k, y * k, z * k);
 }
 
 Vector3 Vector3::operator*(int k)
 {
-	return Vector3();
+	// An overloaded operator * to return the product of a scalar by a vector
+	return Vector3(x * k, y * k, z * k);
 }
 
 Vector3 Vector3::operator^(Vector3 V1)
 {
-	return Vector3();
+	// An overloaded operator ^ to return the vector product of 2 vectors
+	return Vector3(V1.y * z - V1.z * y, V1.z * x - V1.x * z, V1.x * y - V1.y * x);
 }
+
+
 
 std::string Vector3::toString()
 {
-	return std::string();
+	char tmpbuf[256];
+	sprintf_s(tmpbuf, "[%g, %g, %g]", x, y, z);
+	return tmpbuf;
 }
