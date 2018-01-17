@@ -15,15 +15,15 @@ Matrix3::Matrix3()
 
 Matrix3::Matrix3(Vector3 Row1, Vector3 Row2, Vector3 Row3)
 {
-	A11 = Row1.X;
-	A12 = Row1.Y;
-	A13 = Row1.Z;
-	A21 = Row2.X;
-	A22 = Row2.Y;
-	A23 = Row2.Z;
-	A31 = Row3.X;
-	A32 = Row3.Y;
-	A33 = Row3.Z;
+	A11 = Row1.getX();
+	A12 = Row1.getY();
+	A13 = Row1.getZ();
+	A21 = Row2.getX();
+	A22 = Row2.getY();
+	A23 = Row2.getZ();
+	A31 = Row3.getX();
+	A32 = Row3.getY();
+	A33 = Row3.getZ();
 }
 
 Matrix3::Matrix3(double _A11, double _A12, double _A13, double _A21, double _A22, double _A23, double _A31, double _A32, double _A33)
@@ -39,14 +39,11 @@ Matrix3::Matrix3(double _A11, double _A12, double _A13, double _A21, double _A22
 	A33 = _A33;
 }
 
-Vector3 Matrix3::operator*(Matrix3 M1)
-{
-
-}
-
 Vector3 Matrix3::operator*(Vector3 V1)
 {
-	return Vector3();
+	return Vector3(A11 * V1.getX() + A12 * V1.getY() + A13 * V1.getZ(),
+		A21 * V1.getX() + A22 * V1.getY() + A23 * V1.getZ(),
+		A31 * V1.getX() + A32 * V1.getY() + A33 * V1.getZ());
 }
 
 Matrix3 Matrix3::Transpose(Matrix3 M1)
@@ -59,7 +56,16 @@ Matrix3 Matrix3::Transpose(Matrix3 M1)
 
 Matrix3 Matrix3::operator+(Matrix3 M1)
 {
-	return Matrix3();
+	return Matrix3(M1.A11 + A11, M1.A12 + A12, M1.A13 + A13,
+		M1.A21 + A21, M1.A22 + A22, M1.A23 + A23,
+		M1.A31 + A31, M1.A32 + A32, M1.A33 + A33);
+}
+
+Matrix3 Matrix3::operator-(Matrix3 M1)
+{
+	return Matrix3(M1.A11 - A11, M1.A12 - A12, M1.A13 - A13,
+		M1.A21 + A21, M1.A22 + A22, M1.A23 + A23,
+		M1.A31 + A31, M1.A32 + A32, M1.A33 + A33);
 }
 
 double Matrix3::Determinant(Matrix3 M1)
@@ -128,7 +134,19 @@ Matrix3 Matrix3::Inverse(Matrix3 M1)
 
 Matrix3 Matrix3::Rotation(int _angle)
 {
-	return Matrix3();
+	double radians = PI / 180 * _angle;
+	Matrix3 answer = Matrix3();
+	answer.A11 = cos(radians);
+	answer.A12 = sin(radians);
+	answer.A13 = 0;
+	answer.A21 = -sin(radians);
+	answer.A22 = cos(radians);
+	answer.A23 = 0;
+	answer.A31 = 0;
+	answer.A32 = 0;
+	answer.A33 = 1;
+
+	return answer;
 }
 
 
@@ -165,19 +183,51 @@ Matrix3 Matrix3::Scale(int dx, int dy)
 	return answer;
 }
 
-Matrix3 Matrix3::operator-(Matrix3 M1)
+Matrix3 Matrix3::Negative(Matrix3 M1)
 {
-	/*return -1 * M1;*/
+	return M1 * -1;
 }
 
-Matrix3 Matrix3::operator*(double x)
+Matrix3 Matrix3::operator *(double x)
 {
-	return Matrix3();
+	Matrix3 answer = Matrix3();
+	answer.A11 = A11 * x;
+	answer.A12 = A12 * x;
+	answer.A13 = A13 * x;
+
+	answer.A21 = A21 * x;
+	answer.A22 = A22 * x;
+	answer.A23 = A23 * x;
+
+	answer.A31 = A31 * x;
+	answer.A32 = A32 * x;
+	answer.A33 = A33 * x; ;
+
+	return answer;
+}
+
+Matrix3 Matrix3::operator*(Matrix3 M1)
+{
+	Matrix3 answer = Matrix3();
+	answer.A11 = M1.Row(0) * Column(0);
+	answer.A12 = M1.Row(0) * Column(1);
+	answer.A13 = M1.Row(0) * Column(2);
+
+	answer.A21 = M1.Row(1) * Column(0);
+	answer.A22 = M1.Row(1) * Column(1);
+	answer.A23 = M1.Row(1) * Column(2);
+
+	answer.A31 = M1.Row(2) * Column(0);
+	answer.A32 = M1.Row(2) * Column(1);
+	answer.A33 = M1.Row(2) * Column(2);
+
+
+	return answer;
 }
 
 Matrix3 Matrix3::RotationX(int _angle)
 {
-	/*Double radians = PI / 180 * _angle;
+	double radians = PI / 180 * _angle;
 	Matrix3 answer = Matrix3();
 	answer.A11 = 1;
 	answer.A12 = 0;
@@ -189,12 +239,12 @@ Matrix3 Matrix3::RotationX(int _angle)
 	answer.A32 = sin(radians);
 	answer.A33 = cos(radians);
 
-	return answer;*/
+	return answer;
 }
 
 Matrix3 Matrix3::RotationY(int _angle)
 {
-	/*Double radians = PI / 180 * _angle;
+	double radians = PI / 180 * _angle;
 	Matrix3 answer = Matrix3();
 	answer.A11 = cos(radians);
 	answer.A12 = 0;
@@ -206,24 +256,24 @@ Matrix3 Matrix3::RotationY(int _angle)
 	answer.A32 = 0;
 	answer.A33 = cos(radians);
 
-	return answer;*/
+	return answer;
 }
 
 Matrix3 Matrix3::RotationZ(int _angle)
 {
-	//Double radians = PI / 180 * _angle;
-	//Matrix3 answer =  Matrix3();
-	//answer.A11 = cos(radians);
-	//answer.A12 = -sin(radians);
-	//answer.A13 = 0;
-	//answer.A21 = sin(radians);
-	//answer.A22 = cos(radians);
-	//answer.A23 = 0;
-	//answer.A31 = 0;
-	//answer.A32 = 0;
-	//answer.A33 = 1;
+	double radians = PI / 180 * _angle;
+	Matrix3 answer =  Matrix3();
+	answer.A11 = cos(radians);
+	answer.A12 = -sin(radians);
+	answer.A13 = 0;
+	answer.A21 = sin(radians);
+	answer.A22 = cos(radians);
+	answer.A23 = 0;
+	answer.A31 = 0;
+	answer.A32 = 0;
+	answer.A33 = 1;
 
-	//return answer;
+	return answer;
 }
 
 Matrix3 Matrix3::Scale3D(int dx)
