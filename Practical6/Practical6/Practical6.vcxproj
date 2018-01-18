@@ -123,6 +123,11 @@
     <ClInclude Include="Matrix3.h" />
     <ClInclude Include="Vector3.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Matrix3.cs" />
+    <None Include="Quaternion.cs" />
+    <None Include="Vector3.cs" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

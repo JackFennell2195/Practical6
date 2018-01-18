@@ -1,7 +1,6 @@
-#include <iostream>
+#include "Matrix3.h"
 
 int main()
 {
-	system("pause");
 	return 0;
 }

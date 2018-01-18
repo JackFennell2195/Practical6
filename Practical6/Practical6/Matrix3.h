@@ -11,7 +11,7 @@ public:
 	Matrix3(double _A11, double _A12, double _A13,
 			double _A21, double _A22, double _A23,
 			double _A31, double _A32, double _A33);
-	const float PI = 3.14;
+	const float PI = 3.14f;
 	Vector3 operator*( Vector3 V1);
 	Matrix3 Transpose(Matrix3 M1);
 	Matrix3 operator +(Matrix3 M1);
